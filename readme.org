@@ -16,7 +16,7 @@
 		"xelatex -interaction nonstopmode -output-directory %o %f"))
 	(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
       #+END_SRC
-   2. org-ctex
+   2. org2ctex
       #+BEGIN_SRC elisp
 	(require 'org2ctex)
 	(org2ctex-toggle t)
