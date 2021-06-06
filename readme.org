@@ -38,7 +38,7 @@
       #+BEGIN_SRC elisp
 	;; 文件头部
 	;; 导入参考文献样式包
-	/usepackage[number]{gbt7714}
+	/usepackage[numbers]{gbt7714}
 
 	;; 文件末尾
 	;; 导入参考文献所在bib文件 (org-ref-insert-bibliography-link)
