@@ -1,0 +1,73 @@
+* org-mode学术写作
+  
+** 基本环境
+   1. org-mode
+   2. Tex环境
+** emacs插件及配置
+   1. tex
+      #+BEGIN_SRC elisp
+	(require 'tex)
+	(setq TeX-global-PDF-mode t TeX-engine 'xetex)
+	(setq TeX-command-default "XeLaTeX")
+	(setq org-latex-pdf-process
+	      '("xelatex -interaction nonstopmode -output-directory %o %f"
+		"bibtex %b"
+		"xelatex -interaction nonstopmode -output-directory %o %f"
+		"xelatex -interaction nonstopmode -output-directory %o %f"))
+	(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+      #+END_SRC
+   2. org-ctex
+      #+BEGIN_SRC elisp
+	(require 'org2ctex)
+	(org2ctex-toggle t)
+      #+END_SRC
+   3. org-ref
+      #+BEGIN_SRC elisp
+	(require 'org-ref)
+      #+END_SRC
+   4. ebib
+      #+BEGIN_SRC elisp
+	(require 'ebib)
+	(global-set-key (kbd "C-c n e") 'ebib)
+	(setq ebib-preload-bib-files '("phd_references.bib"))
+	(setq ebib-citation-commands
+	      (quote ((org-mode (("cite" " cite:%K "))))))
+      #+END_SRC
+** 工作流
+   1. 创建org文件，导入bibtex相关配置及文件：
+      #+BEGIN_SRC elisp
+	;; 文件头部
+	;; 导入参考文献样式包
+	/usepackage[number]{gbt7714}
+
+	;; 文件末尾
+	;; 导入参考文献所在bib文件 (org-ref-insert-bibliography-link)
+	bibliography:demo.bib
+      #+END_SRC
+
+   2. 在bibtex文件中添加、管理条目：
+      #+BEGIN_SRC elisp
+	;; 1. 通过org-ref方式
+	;; via doi
+	(org-ref-bibtex-entry-doi)
+	;; manual
+	(org-ref-bibtex-new-entry/bibtex-Article-and-exit)
+	(org-ref-bibtex-new-entry/bibtex-Proceedings-and-exit)
+	....
+	;; 点击bibliography-link进入bibtex文件
+
+	;; 2. 通过ebib方式
+	;; 打开ebib
+	(ebib)
+	;; o手动选择bibtex文件，e进行编辑
+      #+END_SRC
+
+   3. 在文章中插入参考文献：
+      #+BEGIN_SRC elisp
+	;; 1. 通过org-ref方式
+	(org-ref-insert-link)
+
+	;; 2. 通过ebib方式
+	(ebib)
+	;; m标记文献，i插入到文章中
+      #+END_SRC
