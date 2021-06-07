@@ -41,8 +41,11 @@
 	/usepackage[numbers]{gbt7714}
 
 	;; 文件末尾
-	;; 导入参考文献所在bib文件 (org-ref-insert-bibliography-link)
+	;; 导入参考文献所在bib文件
+	;; org-ref (org-ref-insert-bibliography-link)
 	bibliography:demo.bib
+	;; ebib latex格式
+	\bibliography{demo}
       #+END_SRC
 
    2. 在bibtex文件中添加、管理条目：
@@ -71,3 +74,23 @@
 	(ebib)
 	;; m标记文献，i插入到文章中
       #+END_SRC
+** ebib快捷键
+   + catalog view
+     - o: open a bibtex file as database
+     - C e: copy bibtex entry
+     - C k: copy bibtex key
+     - y: yank a bibtex entry from kill-ring
+     - /: search within one database
+     - j: global search across databases
+     - 1-9: switch between databases
+     - i: insert into a buffer
+     - e: enter edit mode
+     - m: mark entry
+     - z: minimize
+     - q: quit
+     - k: remove an entry
+     - C-c n e: launch ebib (personal key binding)
+   + record view
+     - m: edit multiline field, C-c C-c to save and exit the editing
+       mode
+*** 
